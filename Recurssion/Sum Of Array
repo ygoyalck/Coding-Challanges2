@@ -1,0 +1,10 @@
+int sum(int input[], int n) {
+ if(n==0)
+   return 0;
+  else if(n==1)
+    return input[0];
+  else{
+    int so=sum(input+1,n-1);
+    return so+input[0];
+  }
+}
