@@ -1,0 +1,16 @@
+int lastIndex(int input[], int size, int x) {
+ if(size==0)
+   return -1;
+  
+  else{
+    int so=lastIndex(input+1,size-1,x);
+    if(so!=-1)
+      return so+1;
+    else{
+      if(input[0]==x)
+        return 0;
+      else
+        return -1;
+    }
+  }
+}
