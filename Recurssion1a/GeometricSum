@@ -1,0 +1,9 @@
+double geometricSum(int k) {
+   if(k==0)
+     return 1;
+  double so=geometricSum(k-1);
+  return so+pow(0.5,k);
+
+}
+
+
