@@ -1,0 +1,27 @@
+int length(char input[])
+{
+  int l=0;
+  for(;;)
+  {
+    if(input[l]=='\0')
+      break;
+    else{
+      l++;
+    }
+  }
+  return l;
+}
+int stringToNumber(char input[]) {
+    if(length(input)==0)
+      return 0;
+  int x=stringToNumber(input+1);
+  int w=input[0];
+  w=w-48;
+  for(int i=0;i<length(input)-1;i++)
+  {
+    w=w*10;
+  }
+  return w+x;
+}
+
+
