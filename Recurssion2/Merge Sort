@@ -1,0 +1,64 @@
+void sorted(int* input,int sia,int sib,int eia,int eib)
+{
+   int* n=new int[eia-sia+1+eib-sib+1];
+  int i=sia;
+  int j=sib;
+  int k=0;
+  while(i<=eia && j<=eib)
+  {
+    if(input[i]<=input[j])
+    {
+      n[k]=input[i];
+      i++;
+      k++;
+    }
+    else{
+      n[k]=input[j];
+      j++;
+      k++;
+    }
+  }
+  while(i<=eia)
+  {
+    n[k]=input[i];
+    i++;
+    k++;
+  }
+  while(j<=eib)
+  {
+    n[k]=input[j];
+    j++;
+    k++;
+  }
+  int l=sia;
+  int o=0;
+ while(l<=eia)
+ {
+   input[l]=n[o];
+   l++;
+   o++;
+ }
+  int u=sib;
+ while(u<=eib)
+ {
+   input[u]=n[o];
+   u++;
+   o++;
+ }
+  
+  
+  
+}
+void sort(int* input,int si,int ei)
+{
+  if(si>=ei)
+    return;
+  int mid=(ei+si)/2;
+  sort(input,si,mid);
+  sort(input,mid+1,ei);
+  sorted(input,si,mid+1,mid,ei);
+}
+
+void mergeSort(int input[], int size){
+  sort(input,0,size-1);
+}
