@@ -1,0 +1,58 @@
+using namespace std;
+int partition(int input[],int s,int e){
+  int pivot = input[s];
+  int f=0;
+  for(int i=s;i<=e;i++){
+    if(input[i]<pivot){
+      f++;
+    }
+  }
+  //cout<<pivot;
+  int h = s+f;
+  int t=input[h];
+  input[h] = input[s];
+  input[s]=t;
+  
+  int x=s;
+  int y=e;
+  while(x<y){
+    if(input[x]<pivot){
+      x++;
+    }
+   else if(input[y]>=pivot){
+      y--;
+    }
+   else if(input[x]>=pivot && input[y]<pivot){
+      int v=input[x];
+      input[x]=input[y];
+      input[y]=v;
+      x++;
+      y--;
+    }
+    
+  }
+  
+  
+ return h;
+}
+
+
+void qs(int input[],int s,int e){
+  if(s>=e){
+    return;
+  }
+  
+  int c = partition(input,s,e);
+  qs(input,s,c-1);
+  qs(input,c+1,e);
+  
+}
+void quickSort(int input[], int size) {
+  /* Don't write main().
+     Don't read input, it is passed as function argument.
+     Change in the given array itself.
+     Taking input and printing output is handled automatically.
+  */
+  qs(input,0,size-1);
+
+}
