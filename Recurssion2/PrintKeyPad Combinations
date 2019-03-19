@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+using namespace std;
+string a[10];
+void seta()
+{
+ a[0]="";
+a[1]="";
+a[2]="abc";
+a[3]="def";
+a[4]="ghi";
+a[5]="jkl";
+a[6]="mno";
+a[7]="pqrs";
+a[8]="tuv";
+a[9]="wxyz"; 
+}
+
+//////ansssssss yhiii h bs baaki bkwas mt pdhio..just read helper
+
+void helper(int num,string out)
+{
+ if(num==0)
+ {
+   //print out
+   cout<<out<<endl;
+ }
+  else{
+    for(int i=0;i<a[num%10].length();i++)
+    {
+      helper(num/10,a[num%10][i]+out);
+    }
+  }
+}
+
+
+
+
+
+
+void printKeypad(int num){
+    seta();
+  string output="";
+  helper(num,output);
+}
