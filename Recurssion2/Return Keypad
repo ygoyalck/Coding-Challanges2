@@ -1,0 +1,55 @@
+#include <string>
+using namespace std;
+ string a[10];
+ void fun()
+ {
+    a[0]='\0';
+  a[1]='\0';
+  a[2]="abc";
+  a[3]="def";
+  a[4]="ghi";
+  a[5]="jkl";
+  a[6]="mno";
+  a[7]="pqrs";
+  a[8]="tuv";
+  a[9]="wxyz";
+ }
+int keypad(int num, string output[]){
+  fun();
+  if(num==0)
+{output[0]="";
+    return 1;}
+  
+  int so=keypad(num/10,output);
+  
+  int k=so;
+  int h=so;
+  int loop=a[num%10].length()-1;
+  
+  while(loop>0)
+ {
+    int i=0;
+    h = so;
+    while(h>0)
+  {
+      
+      output[k]=output[i];
+       i++;
+       k++;
+      h--;
+   }
+    loop--;
+    
+}
+int p=0;
+for(int j=0;j<a[num%10].length();j++)
+{
+  int u=0;
+ while(u<so)
+  {output[p]=output[p]+a[num%10][j];
+  p++;
+  u++;}
+
+}
+return a[num%10].length()*so;
+}
