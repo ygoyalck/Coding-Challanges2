@@ -1,0 +1,23 @@
+#include <string>
+using namespace std;
+
+int returnPermutations(string input, string output[]){
+   	if(input.length()==1)
+    {
+      output[0]=input[0];
+      return 1;
+    }
+  
+  string out[10000];
+  int x=returnPermutations(input.substr(1),out);
+  int m=0;
+  for(int i=0;i<x;i++)
+  {
+    for(int j=0;j<=out[i].length();j++)
+    {
+      output[m]=out[i].substr(0,j)+input[0]+out[i].substr(j);
+      m++;
+    }
+  }
+  return x*input.length();
+}
