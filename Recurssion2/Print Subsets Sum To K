@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+void helper(int input[],int size,int k,vector<int> output)
+{
+  if(k==0)
+  {
+    for(int i=0;i<output.size();i++)
+     {
+       cout<<output[i]<<" ";
+     }
+      cout<<endl;
+      return;
+  }
+  if(size==0)
+  {
+    if(k==0)
+    {
+     for(int i=0;i<output.size();i++)
+     {
+       cout<<output[i]<<" ";
+     }
+      cout<<endl;
+      return;
+    }
+    else
+      return;
+  }
+  output.push_back(input[0]);
+  helper(input+1,size-1,k-input[0],output);
+  output.pop_back();
+  helper(input+1,size-1,k,output);
+}
+
+
+void printSubsetSumToK(int input[], int size, int k) {
+  
+vector<int> output;
+    helper(input,size,k,output);
+}
