@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+void pairSum(int input[], int size, int x) {
+   unordered_map<int,int> m;
+  for(int i=0;i<size;i++)
+  {
+    m[input[i]]++;
+  }
+  
+  
+  for(int i=0;i<size;i++)
+  {
+    if(m[x-input[i]]>0)
+    {
+      if(x-input[i]==input[i])
+      {
+      
+        for(int j=0;j<(m[input[i]]*(m[input[i]]-1)/2);j++)
+        {
+          cout<<input[i]<<" "<<input[i]<<endl;
+        }
+        m[input[i]]=0;
+      }
+      
+      
+     else{
+       int w=m[input[i]];
+       int y=m[x-input[i]];
+       int z=w*y;
+      for(int j=0;j<z;j++)
+      {
+        cout<<min(input[i],x-input[i])<<" "<<max(input[i],x-input[i])<<endl;
+      }
+      m[input[i]]=0;
+      m[x-input[i]]=0;}
+    }
+  }
+
+}
