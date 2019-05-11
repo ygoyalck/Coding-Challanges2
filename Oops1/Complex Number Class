@@ -1,0 +1,32 @@
+class ComplexNumbers {
+    public:
+  int real;
+  int imaginary;
+  ComplexNumbers(int x,int y)
+  {
+    real=x;
+    imaginary=y;
+  }
+  void plus(ComplexNumbers c2)
+  {
+    real=real+c2.real;
+    imaginary=imaginary+c2.imaginary;
+  }
+  void multiply(ComplexNumbers c2)
+  {
+    //real=(real*c2.real)-(imaginary*c2.imaginary);
+    //imaginary=(real*(c2.imaginary))+((c2.real)*(imaginary));
+    int a = (real*c2.real) - (imaginary*c2.imaginary) ;
+    int b = (imaginary*c2.real)  + (real*c2.imaginary) ;
+    real = a; 
+    imaginary = b;
+  }
+  void print(){
+    if(imaginary>0)
+      cout<<real<<" + i"<<imaginary;
+    else if(imaginary==0)
+      cout<<real;
+     else
+       cout<<real<<" - i"<<-imaginary;
+    }
+};
