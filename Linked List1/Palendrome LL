@@ -1,0 +1,86 @@
+//head is the head of you linked list
+// Following is the node structure
+/**************
+class node{
+public:
+    int data;
+    node * next;
+    node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+***************/
+using namespace std;
+node* reverse(node* head)
+{
+  node* pre=NULL;
+  node* curr=head;
+  node* nxt;
+  while(curr)
+  {
+    nxt=curr->next;
+    curr->next=pre;
+    pre=curr;
+    curr=nxt;
+  }
+  return pre;
+}
+int len(node* head)
+{
+  node* temp=head;
+  int c=0;
+  while(temp)
+  {
+    c++;
+    temp=temp->next;
+  }
+  return c;
+}
+bool check_palindrome(node* head)
+{
+   int l=len(head)-1;
+  //cout<<l;
+  if(l%2!=0)
+  {
+    node* temp=head;
+    int m=(l)/2;
+    for(temp=head;m>0 && temp!=NULL;temp=temp->next)
+    {
+      m--;
+    }
+    node* s1=temp->next;
+    temp->next=NULL;
+    node* s2=reverse(head);
+    node* i1=s1;
+    node* i2=s2;
+    for(i1=s1,i2=s2;i1!=NULL && i2!=NULL;i1=i1->next,i2=i2->next)
+    {
+      //cout<<i1->data<<" "<<i2->data<<endl;
+      if(i1->data!=i2->data)
+        return false;
+    }
+    return true;
+  }
+  else{
+    node* temp=head;
+    int m=((l)/2)-1;
+    for(temp=head;m>0 && temp!=NULL;temp=temp->next)
+    {
+      m--;
+    }
+    node* s1=temp->next->next;
+    temp->next=NULL;
+    node* s2=reverse(head);
+    node* i1=s1;
+    node* i2=s2;
+    for(i1=s1,i2=s2;i1 && i2;i1=i1->next,i2=i2->next)
+    {
+      if(i1->data!=i2->data)
+        return false;
+    }
+    return true;
+    
+  }
+  
+}
