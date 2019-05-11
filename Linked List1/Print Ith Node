@@ -1,0 +1,29 @@
+/**********
+ * Following is the Node class that is already written.
+ 
+class Node{
+public:
+    int data;
+    Node *next;
+    Node(int data){
+        this -> data = data;
+        this -> next = NULL;
+    }
+};
+ 
+*********/
+
+void printIthNode(Node *head, int i) {
+   //d=-INT_MIN;
+  Node* temp=head;
+  for(temp=head;i>0 && temp!=NULL;temp=temp->next)
+  {
+    i--;
+  }
+  if(temp!=NULL)
+    cout<<temp->data;
+    
+  
+}
+
+
