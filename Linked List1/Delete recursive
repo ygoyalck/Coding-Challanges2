@@ -1,0 +1,34 @@
+/**********
+ * Following is the Node class that is already written.
+ 
+class Node{
+public:
+    int data;
+    Node *next;
+    Node(int data){
+        this -> data = data;
+        this -> next = NULL;
+    }
+};
+ 
+*********/
+
+Node* deleteNodeRec(Node *head, int i) {
+   if(head==NULL)
+     return head;
+  else if(i==0)
+  {
+    Node* t=head;
+    head=head->next;
+    delete t;
+    return head;
+  }
+  else{
+    Node* t=deleteNodeRec(head->next,i-1);
+    head->next=t;
+    return head;
+  }
+    
+}
+
+
