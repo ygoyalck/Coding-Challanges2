@@ -1,0 +1,143 @@
+#include <iostream>
+
+class Polynomial {
+  public:
+    // array containing coeffs for each degree of polynomial
+    int *degCoeff;
+
+    // capacity of polynomial
+    int capacity;
+
+    // defualt constructor
+    Polynomial();
+
+    // copy constructor for deep copy
+    Polynomial(const Polynomial &);
+
+    // copy assignment operator for deep copy
+    Polynomial &operator=(const Polynomial &);
+
+    // overloading the `+` operator for polynomial addition
+    Polynomial &operator+(const Polynomial &) const;
+
+    // overloading the `-` operator for polynomial subtraction
+    Polynomial &operator-(const Polynomial &) const;
+
+    // overloading the `*` operator for polynomial multiplication
+    Polynomial &operator*(const Polynomial &)const;
+
+    // sets the co-eff for a certain degree term of polynomial
+    void setCoefficient(int, int);
+
+    // prints the polynomial in standard math format
+    void print() const;
+};
+
+Polynomial::Polynomial() {
+    this->capacity = 1;
+    this->degCoeff = new int[this->capacity]{0};
+}
+
+Polynomial::Polynomial(const Polynomial &p) {
+    this->capacity = p.capacity;
+    this->degCoeff = new int[this->capacity];
+    for (int i = 0; i < this->capacity; i++) {
+        this->degCoeff[i] = p.degCoeff[i];
+    }
+}
+
+Polynomial &Polynomial::operator=(const Polynomial &p) {
+    if (this != &p) {
+        this->capacity = p.capacity;
+        this->degCoeff = new int[this->capacity];
+        for (int i = 0; i < this->capacity; i++) {
+            this->degCoeff[i] = p.degCoeff[i];
+        }
+    }
+    return *this;
+}
+
+Polynomial &Polynomial::operator+(const Polynomial &p) const {
+    Polynomial *p3 = new Polynomial();
+    p3->capacity = std::max(this->capacity, p.capacity);
+    delete p3->degCoeff;
+    p3->degCoeff = new int[p3->capacity];
+    for (int i = 0; i < p3->capacity; i++) {
+        p3->degCoeff[i] = 0;
+        if (i < this->capacity) {
+            p3->degCoeff[i] += this->degCoeff[i];
+        }
+        if (i < p.capacity) {
+            p3->degCoeff[i] += p.degCoeff[i];
+        }
+    }
+    return *p3;
+}
+
+Polynomial &Polynomial::operator-(const Polynomial &p) const {
+    Polynomial *p3 = new Polynomial();
+    p3->capacity = std::max(this->capacity, p.capacity);
+    delete p3->degCoeff;
+    p3->degCoeff = new int[p3->capacity];
+    for (int i = 0; i < p3->capacity; i++) {
+        p3->degCoeff[i] = 0;
+        if (i < this->capacity) {
+            p3->degCoeff[i] += this->degCoeff[i];
+        }
+        if (i < p.capacity) {
+            p3->degCoeff[i] -= p.degCoeff[i];
+        }
+    }
+    return *p3;
+}
+
+Polynomial &Polynomial::operator*(const Polynomial &p) const {
+    Polynomial *p3 = new Polynomial();
+    p3->capacity = (this->capacity - 1) + (p.capacity - 1) + 1;
+    delete p3->degCoeff;
+    p3->degCoeff = new int[p3->capacity];
+    for (int i = 0; i < p3->capacity; i++) {
+        p3->degCoeff[i] = 0;
+    }
+    for (int i = 0; i < this->capacity; i++) {
+        if (this->degCoeff[i] == 0) {
+            continue;
+        }
+        for (int j = 0; j < p.capacity; j++) {
+            if (p.degCoeff[j] == 0) {
+                continue;
+            }
+            p3->degCoeff[i + j] += this->degCoeff[i] * p.degCoeff[j];
+        }
+    }
+    return *p3;
+}
+
+void Polynomial::setCoefficient(int degree, int coeff) {
+    if (degree < this->capacity) {
+        this->degCoeff[degree] = coeff;
+    } else {
+        int *aux = new int[degree + 1];
+        for (int i = 0; i < this->capacity; i++) {
+            aux[i] = this->degCoeff[i];
+        }
+        for (int i = this->capacity; i < degree + 1; i++) {
+            aux[i] = 0;
+        }
+        aux[degree] = coeff;
+        delete this->degCoeff;
+        this->degCoeff = aux;
+        this->capacity = degree + 1;
+    }
+}
+
+void Polynomial::print() const {
+    for (int i = 0; i < this->capacity; i++) {
+        if (this->degCoeff[i] == 0) {
+            continue;
+        }
+        std::cout << this->degCoeff[i] << 'x' << i << ' ';
+    }
+    std::cout << '\n';
+}
+
