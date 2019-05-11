@@ -1,0 +1,47 @@
+//head is the head of the linked list and n is  how many element you want to append from the last to the front
+// Following is the node structure
+/**************
+class node{
+public:
+    int data;
+    node * next;
+    node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+***************/
+int l(node* head)
+{
+  int c=0;
+  node* temp=head;
+  while(temp)
+  {
+    c++;
+    temp=temp->next;
+  }
+  return c;
+}
+node* append_LinkedList(node* head,int n)
+{
+  
+    node* temp=head;
+  while(temp->next)
+  {
+    temp=temp->next;
+  }
+  int s=l(head)-n-1;
+  node* temp2=head;
+  for(temp2=head;s>0 && temp2!=NULL;temp2=temp2->next)
+  {
+    s--;
+  }
+  node* w=temp2->next;
+  //temp2->next;
+  temp2->next=NULL;
+  temp->next=head;
+  return w;
+  
+  
+  
+}
