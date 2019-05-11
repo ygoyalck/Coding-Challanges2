@@ -1,0 +1,13 @@
+#include<bits/stdc++.h>
+bool checksequenece(char large[] , char*small) {
+if(strlen(small)==0)
+  return true;
+for(int i=0;i<strlen(large);i++)
+{
+  if(small[0]==large[i])
+  {
+    return checksequenece(large+i+1,small+1);
+  }
+}
+  return false;
+}
