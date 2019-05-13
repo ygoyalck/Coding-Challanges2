@@ -1,0 +1,13 @@
+node *reverse_linked_list_rec(node *head)
+{
+//base case
+  if(head==NULL || head->next==NULL)
+    return head;
+    
+  
+node* t=reverse_linked_list_rec(head->next);
+head->next->next=head;
+  head->next=NULL;
+  return t;
+}
+
