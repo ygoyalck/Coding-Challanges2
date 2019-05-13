@@ -1,0 +1,73 @@
+node* merge(node* head1,node* head2)
+{
+     node* head;
+ // Node* tail;
+  node* i1=head1;
+  node* i2=head2;
+if(head1==NULL)
+  return head2;
+else if(head2==NULL)
+  return head1;
+  
+if(i1->data<=i2->data)
+{
+  head=i1;
+  //tail=i1;
+  i1=i1->next;
+}
+else
+{
+    head=i2;
+   // tail=i2;
+    i2=i2->next;
+}
+  node* rtrn=head;
+for(;i1 && i2;)
+{
+  if(i1->data<=i2->data)
+  {
+    head->next=i1;
+    i1=i1->next;
+    head=head->next;
+  }
+  else{
+    head->next=i2;
+    i2=i2->next;
+    head=head->next;
+  }
+}
+  while(i1)
+  {
+    head->next=i1;
+    i1=i1->next;
+    head=head->next;
+  }
+  while(i2)
+  {
+    head->next=i2;
+    i2=i2->next;
+    head=head->next;
+  }
+  
+ return rtrn; 
+}
+node* merge_sort(node* head)
+{
+  if(head==NULL || head->next==NULL)
+    return head;
+  node* slow=head;
+  node* fast=head->next;
+  while(fast && fast->next)
+  {
+    slow=slow->next;
+    fast=fast->next->next;
+  }
+  node* u=slow->next;
+  slow->next=NULL;
+  node* a=merge_sort(head);
+  node* b=merge_sort(u);
+ return merge(a,b);
+}
+node* mergeSort(node *head) {
+  return merge_sort(head); 
+}
