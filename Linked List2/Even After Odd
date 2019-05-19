@@ -1,0 +1,59 @@
+// Following is the node structure
+/**************
+class node{
+public:
+    int data;
+    node * next;
+    node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+***************/
+
+node* arrange_LinkedList(node* head)
+{
+ node* oddh=NULL;
+ node* oddt=NULL;
+ node* evenh=NULL;
+ node* event=NULL;
+  if(head==NULL)
+    return head;
+ while(head)
+ {
+   if(head->data%2==0)
+   {
+     if(evenh==NULL)
+     {
+       evenh=head;
+       event=head;
+     }
+     else{
+       event->next=head;
+       event=event->next;
+     }
+   }
+   else{
+     if(oddh==NULL)
+     {
+       oddh=head;
+       oddt=head;
+     }
+     else{
+       oddt->next=head;
+       oddt=oddt->next;
+     }
+   }
+   head=head->next;
+ }
+  if(oddh!=NULL)
+ { oddt->next=evenh;
+  if(event)
+  event->next=NULL;
+  return oddh;
+ }
+  else{
+    event->next=NULL;
+    return evenh;
+  }
+}
