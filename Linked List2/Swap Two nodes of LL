@@ -1,0 +1,74 @@
+//abs(i-j) kuch nhi h..leave thet
+
+
+node* swap_nodes(node *head,int i,int j)
+{
+  if(head==NULL || head->next==NULL)
+    return head;
+ if(i==0)
+ {node* c1=head;
+   node* p2=head;
+  node* c2=head;
+    for(int m=1;m<=j;m++)
+  {
+    c2=c2->next;
+  }
+  for(int m=1;m<j;m++)
+  {
+    p2=p2->next;
+  }
+  p2->next=c1;
+  node* temp=c1->next;
+  head=c2;
+  c1->next=c2->next;
+  c2->next=temp;
+  return head;
+ }
+   if(j==0)
+ {node* c1=head;
+   node* p2=head;
+  node* c2=head;
+    for(int m=1;m<=i;m++)
+  {
+    c2=c2->next;
+  }
+  for(int m=1;m<i;m++)
+  {
+    p2=p2->next;
+  }
+  p2->next=c1;
+  node* temp=c1->next;
+  head=c2;
+  c1->next=c2->next;
+  c2->next=temp;
+  return head;
+ }
+  node* p1=head;
+  node* c1=head;
+  node* p2=head;
+  node* c2=head;
+  for(int m=1;m<=i;m++)
+  {
+    c1=c1->next;
+  }
+  for(int m=1;m<i;m++)
+  {
+    p1=p1->next;
+  }
+  for(int m=1;m<=j;m++)
+  {
+    c2=c2->next;
+  }
+  for(int m=1;m<j;m++)
+  {
+    p2=p2->next;
+  }
+  p1->next=c2;
+  p2->next=c1;
+  node* temp=c1->next;
+  c1->next=c2->next;
+  c2->next=temp;
+  return head;
+}
+  
+  
