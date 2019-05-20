@@ -1,0 +1,44 @@
+#include<stack>
+bool is_pair(char a,char b)
+{
+  if(a=='(' && b==')')
+    return true;
+  else if(a=='{' && b=='}')
+    return true;
+   else if(a=='[' && b==']')
+    return true;
+  else
+    return false;
+}
+int length(char* c)
+{
+  int i=0;
+  int count=0;
+  for(;;)
+  {
+    if(c[i]=='\0')
+      break;
+    i++;
+    count++;
+  }
+  return count;
+}
+bool checkBalanced(char *exp) {
+stack<int> s;
+  for(int i=0;i<length(exp);i++)
+  {
+    if(exp[i]=='(' || exp[i]=='{' || exp[i]=='[')
+      s.push(exp[i]);
+    else if(exp[i]==')' || exp[i]=='}' || exp[i]==']')
+    {
+      if(s.empty()==true || !is_pair(s.top(),exp[i]))
+        return false;
+      else{
+        s.pop();
+      }
+    }
+  }
+  if(s.empty()==true)
+    return true;
+  return false;
+}
