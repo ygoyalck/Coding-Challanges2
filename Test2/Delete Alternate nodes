@@ -1,0 +1,1 @@
+void delete_alternate_node_LinkedList(Node *head) { Node *temp = head; while(temp != NULL && temp -> next != NULL) { Node *t = temp -> next; temp -> next = temp -> next -> next; t -> next = NULL; delete t; temp = temp -> next; } }
