@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+template <typename T>
+class m{
+  public: 
+  TreeNode<int>* x;
+  int max;
+};
+m<int>* helper(TreeNode<int> *root)
+{
+  if(root==NULL)
+  {
+    m<int>* pair=new m<int>;
+      pair->x=NULL;
+      pair->max=INT_MIN;
+    return pair;
+    }
+  else if(root->children.size()==0)
+  {
+     m<int>* pair=new m<int>;
+      pair->x=root;
+      pair->max=root->data;
+    return pair;
+  }
+    else{
+        int r=root->data;
+      for(int i=0;i<root->children.size();i++)
+      {
+      r+=root->children[i]->data;
+      }
+      m<int>* ans=new m<int>;
+      ans->x=root;
+      ans->max=r;
+      for(int i=0;i<root->children.size();i++)
+      {
+        m<int>* temp=helper(root->children[i]);
+        if(temp->max>ans->max)
+        {
+          ans->x=temp->x;
+          ans->max=temp->max;
+        }
+      }
+      return ans;
+    }
+  
+}
+TreeNode<int>* maxSumNode(TreeNode<int> *root){
+    m<int> *i=helper(root);
+  return i->x;
+
+}
+
