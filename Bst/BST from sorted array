@@ -1,0 +1,17 @@
+BinaryTreeNode<int>* helper(int *input, int si,int ei)
+{
+  if(si>ei)
+    return NULL;
+  int mid=(si+ei)/2;
+  BinaryTreeNode<int>* n= new BinaryTreeNode<int>(input[mid]);
+  BinaryTreeNode<int>* l=helper(input,si,mid-1);
+  BinaryTreeNode<int>* r=helper(input,mid+1,ei);
+  n->left=l;
+  n->right=r;
+  return n;
+}
+
+BinaryTreeNode<int>* constructTree(int *input, int n) {
+    
+return helper(input,0,n-1);
+}
