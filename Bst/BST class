@@ -1,0 +1,162 @@
+class BST {
+  
+  
+  
+  bool hasDatahlp(int x,BinaryTreeNode<int> *root)
+  {
+    if(root==NULL)
+      return false;
+    else if(root->left==NULL && root->right==NULL)
+    {
+      if(root->data==x)
+        return true;
+      else return false;
+    }
+   bool l=hasDatahlp(x,root->left);
+    bool r=hasDatahlp(x,root->right);
+    return l || r || root->data==x;
+  }
+  
+  
+  
+  
+  BinaryTreeNode<int>* helpinsert(BinaryTreeNode<int>* root,int x)
+  {
+    if(root==NULL)
+    {
+      BinaryTreeNode<int>* n=new BinaryTreeNode<int>(x);
+      return n;
+    }
+    if(x>=root->data)
+      root->right=helpinsert(root->right,x);
+    
+    else{
+      root->left=helpinsert(root->left,x);
+    }
+    return root;
+  }
+  
+  
+  
+  BinaryTreeNode<int>* maximum(BinaryTreeNode<int>* root)
+  {
+    if(root==NULL)
+      return root;
+    else if(root->left==NULL && root->right==NULL)
+      return root;
+    else{
+   BinaryTreeNode<int>* r=maximum(root->right);
+      if(r!=NULL)
+        return r;
+      else 
+        return root;
+  }
+  }
+  
+  
+BinaryTreeNode<int>* minimum(BinaryTreeNode<int>* root)
+  {
+    if(root==NULL)
+      return root;
+    else{
+     
+      BinaryTreeNode<int>* l=minimum(root->left);
+    if(l!=NULL)
+      return l;
+      else if(l==NULL)
+        return root;
+   
+     }
+  }
+  
+  
+  
+  BinaryTreeNode<int>* deletehelper(BinaryTreeNode<int>* root,int x)
+  {
+    if(root==NULL)
+      return NULL;
+    if(root->left==NULL && root->right==NULL)
+    {
+      if(x==root->data)
+        {delete root;
+      return NULL;}
+      else{
+        return root;
+      }
+    }
+    if(x>root->data)
+      root->right=deletehelper(root->right,x);
+    else if(x<root->data)
+      root->left=deletehelper(root->left,x);
+    else{
+      if(root->left==NULL && root->right!=NULL)
+        {BinaryTreeNode<int>* n=root->right;
+         
+         delete root;
+        return n;}
+      else if(root->right==NULL && root->left!=NULL)
+        {BinaryTreeNode<int>* n=root->left;
+     
+         delete root;
+        return n;
+      }
+      else if(root->left==NULL && root->right==NULL)
+      {
+        delete root;
+        return NULL;
+      }
+      else
+      {
+        BinaryTreeNode<int>* d=minimum(root->right);
+        
+        int temp=root->data;
+        root->data=d->data;
+         root->right=deletehelper(root->right,d->data);
+        return root;
+      }
+    }
+  }
+  
+  
+  
+  void printhelper(BinaryTreeNode<int>* root)
+  {
+    if(root==NULL)
+      return;
+    else{
+    cout<<root->data<<":";
+    if(root->left)
+      cout<<"L:"<<root->left->data<<",";
+   
+    if(root->right)
+      cout<<"R:"<<root->right->data;
+    cout<<endl;	
+    }
+    printhelper(root->left);
+
+    printhelper(root->right);
+    
+  }
+	public:
+   BinaryTreeNode<int> *root;
+  BST()
+  {
+    root=NULL;
+  }
+ bool hasData(int x)
+ {
+   return hasDatahlp(x,this->root);
+ }
+  void insert(int x)
+  {
+     this->root=helpinsert(this->root,x);
+  }
+  void deleteData(int x)
+  {
+     this->root=deletehelper(this->root,x);
+  }
+  void printTree()
+  {
+    printhelper(this->root);
+  }
+};
