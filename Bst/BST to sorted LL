@@ -1,0 +1,47 @@
+
+class help{
+  public:
+  Node<int>* head;
+  Node<int>* tail;
+  help()
+  {
+    head=NULL;
+    tail=NULL;
+  }
+};
+help helper(BinaryTreeNode<int>* root)
+{
+  if(root==NULL)
+  {
+    help h;
+    return h;
+  }
+ if(root->left==NULL && root->right==NULL)
+    {
+    help h;
+    Node<int>* n=new Node<int>(root->data);
+    h.head=n;
+    h.tail=n;
+    return h;
+    }
+   help l(helper(root->left));
+   help r(helper(root->right));
+   Node<int>* w=new Node<int>(root->data);
+   help ans;
+   if(l.tail!=NULL)
+   {l.tail->next=w;
+   w->next=r.head;
+   ans.head=l.head;
+   ans.tail=r.tail; 
+   return ans;}
+  else{
+    w->next=r.head;
+    ans.head=w;
+    ans.tail=r.tail;
+    return ans;
+  }
+}
+Node<int>* constructBST(BinaryTreeNode<int>* root) {
+  return helper(root).head;
+    
+}
