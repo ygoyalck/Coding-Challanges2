@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+class help{
+  public:
+  int height;
+  int min;
+  int max;
+  bool isbst;
+};
+help helper(BinaryTreeNode<int> *root)
+{
+  if(root==NULL)
+  {
+    help h;
+    h.height=0;
+    h.min=INT_MAX;
+    h.max=INT_MIN;
+    h.isbst=true;
+    return h;
+  }
+  else if(root->left==NULL && root->right==NULL)
+  {
+    help h;
+    h.height=1;
+    h.min=root->data;
+    h.max=root->data;
+    h.isbst=true;
+    return h;
+  }
+  else{
+    help l(helper(root->left));
+    help r(helper(root->right));
+    help ans;
+    if(l.isbst==true && r.isbst==true && root->data>l.max && root->data<=r.min)
+      ans.isbst=true;
+    else ans.isbst=false;
+    if(ans.isbst==true)
+      ans.height=max(l.height,r.height)+1;
+    else
+      ans.height=max(l.height,r.height);
+    ans.max=max(l.max,max(root->data,r.max));
+    ans.min=min(l.min,min(r.min,root->data));
+    return ans;
+  }
+}
+int largestBSTSubtree(BinaryTreeNode<int> *root) {
+   return helper(root).height;
+
+}
