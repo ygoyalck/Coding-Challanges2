@@ -1,0 +1,15 @@
+int helper(BinaryTreeNode<int> *root,int sum)
+{
+  if(root==NULL)
+    return sum;
+  int x=helper(root->right,sum);
+  sum=root->data+x;
+  root->data=sum;
+
+  int y= helper(root->left,sum);
+  return y;
+}
+void replaceWithLargerNodesSum(BinaryTreeNode<int> *root) {
+  helper(root,0);
+
+}
