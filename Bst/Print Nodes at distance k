@@ -1,0 +1,50 @@
+void printatlevelk(BinaryTreeNode<int> *root, int k)
+{
+  if(root==NULL || k<0)
+    return;
+ 
+    if(k==0)
+     { cout<<root->data<<endl;
+    return;}
+  
+  printatlevelk(root->left,k-1);
+   printatlevelk(root->right,k-1);
+}
+
+int helper(BinaryTreeNode<int> *root, int node, int k)
+{
+  if(root==NULL)
+    return -1;
+  if(root->data==node)
+   { printatlevelk(root,k);
+    return 0;}
+  int l=helper(root->left,node,k);
+ if(l!=-1){ if(l+1==k)
+   { cout<<root->data<<endl;
+   return l+1;}
+          
+          
+       else{
+    printatlevelk(root->right,k-l-2);
+    return l+1;
+  }    
+          }
+  else if(l==-1)
+  {
+    int r=helper(root->right,node,k);
+    if(r==-1)
+      return -1;
+    else if(r+1==k)
+      {cout<<root->data<<endl;
+      return r+1;}
+    else
+      {printatlevelk(root->left,k-r-2);
+    return r+1;}
+  }
+ 
+    
+  
+}
+void nodesAtDistanceK(BinaryTreeNode<int> *root, int node, int k) {
+    helper(root,node,k);
+}
