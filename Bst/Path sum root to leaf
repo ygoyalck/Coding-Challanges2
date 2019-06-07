@@ -1,0 +1,40 @@
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+#include<cstring>
+
+void rootToLeafPathsSumToKh(BinaryTreeNode<int> *root, int k, string s){
+  if(root == NULL){
+    return;
+  }
+ else if(root->left==NULL && root->right==NULL){
+    if(k==root->data)
+      cout<<s<<root->data<<" "<<endl;
+    return;
+  }
+ // char c=root->data + '0';
+   //s.push_back(c);
+    //s.push_back(' ');
+    if(k>root->data)
+    {rootToLeafPathsSumToKh(root->left,k-root->data,s+to_string(root->data)+" ");
+    rootToLeafPathsSumToKh(root->right,k-root->data,s+to_string(root->data)+" ");}
+  
+  //return;
+}
+void rootToLeafPathsSumToK(BinaryTreeNode<int> *root, int k) {
+    // Write your code here
+    string s="";
+	rootToLeafPathsSumToKh(root,k,s);
+}
