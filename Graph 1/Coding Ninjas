@@ -1,0 +1,63 @@
+int a[8][2] = { {-1,-1}, {-1,0}, {-1,1}, {0,1}, {1,1}, {1,0}, {1,-1}, {0,-1} };
+char pattern[11] = {'C','O','D','I','N','G','N','I','N','J','A'};
+
+bool isValid(int n, int m, int x, int y) {
+  return (x>=0 && x<n && y>=0 && y<m);
+}
+
+int searchPattern(char graph[][MAXN], int n, int m, int x, int y, int count, bool** visited) {
+  
+  if(count == 11) // all chars of pattern found
+    return 1;
+  
+  for(int i=0; i<8; i++) {
+    
+    int newx = x + a[i][0];
+    int newy = y + a[i][1];
+    
+    if(isValid(n,m,newx,newy) && graph[newx][newy]==pattern[count] && !visited[newx][newy]) {
+      visited[newx][newy] = true;
+      return searchPattern(graph, n, m, newx, newy, count+1, visited);
+    } 
+  }
+  
+  // if we come of out loop, we need to traverse entirely again
+  for(int i=0; i<n; i++)
+  {
+    for(int j=0; j<m; j++)
+      visited[i][j] = false;
+  } return 0;
+}
+
+int solve(char graph[][MAXN], int n, int m)
+{
+  if(n*m < 11) return 0;
+  
+  
+  bool** visited = new bool*[n];
+  for(int i=0; i<n; i++)
+  {
+    visited[i] = new bool[m];
+    for(int j=0; j<m; j++)
+      visited[i][j] = false;
+  }
+  
+  int i,j,found;
+  for(i=0; i<n; i++)
+  {
+    for(j=0, found=0; j<m; j++)
+    {
+      if(graph[i][j] == 'C')
+      {
+        visited[i][j] = true;
+        found = searchPattern(graph, n, m, i, j, 1, visited);
+        if(found)
+          break;
+      }
+    }
+    if(found)
+      break;
+  }
+  
+  return found;
+}
