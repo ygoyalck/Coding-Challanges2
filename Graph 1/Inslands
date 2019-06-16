@@ -1,0 +1,71 @@
+#include<bits/stdc++.h>
+void dfs(int sv, int** edges,int V,bool* visited)
+{queue<int> q;
+q.push(sv);
+ 
+  visited[sv]=true;
+while(q.size()!=0)
+{
+  int f=q.front();
+q.pop();
+ 
+  for(int i=1;i<=V;i++)
+ {
+   if(visited[i]==false && edges[f][i]==1)
+   {
+     q.push(i);
+      visited[i]=true;
+   }
+     
+ }
+  }
+  
+}
+int travelme(int** edges,int V)
+{
+  bool *visited = new bool[V+1]; 
+    for(int v = 1; v <= V; v++) 
+        visited[v] = false; 
+  
+  
+  int count=0;
+    for (int v=1; v<=V; v++) 
+    { if(visited[v])
+      continue;
+        else if (visited[v] == false) 
+        {  count++;
+          dfs(v,edges,V,visited); 
+ 
+        
+    }
+     
+}
+  delete [] visited;
+return count;
+}
+
+int solve(int n,int m,vector<int>u,vector<int>v)
+{
+	int** edges=new int*[n+1];
+  for(int i=0;i<=n;i++)
+  {
+    edges[i]=new int[n+1];
+    for(int j=0;j<=n;j++)
+    {
+      edges[i][j]=0;
+    }
+  }
+  for(int i=0;i<=m-1;i++)
+  {
+    edges[v[i]][u[i]]=1;
+    edges[u[i]][v[i]]=1;
+  }
+  
+ int x= travelme(edges,n);
+  for(int i=0;i<=n;i++)
+  {
+    delete [] edges[i];
+  }
+  delete [] edges;
+  return x;
+}
