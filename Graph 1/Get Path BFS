@@ -1,0 +1,123 @@
+#include <iostream>
+#include<vector>
+#include<queue>
+using namespace std;
+
+vector<int>* getPath(int **edges,int v1,int v2,int n,bool*visited)
+{
+  queue<int> q;
+  q.push(v1);
+  visited[v1]=true;
+  vector<int> *result =new vector<int> ;
+  int parent[n];
+  for(int i=0;i<n;i++)
+  {
+    parent[i]=-1;
+  }
+  //vector<int> *parent=new vector<int>;
+  while(!q.empty()){
+  
+    int curr=q.front();
+    if(v2==curr)
+        {
+          //result=new vector<int>;
+          result->push_back(v2);
+          break;
+          /*for(int i=parent->size()-1;i>=0;i--)
+          {
+            result->push_back(parent->at(i));
+          }
+          return result;
+          */
+        }
+    //parent->push_back(curr);
+    q.pop();
+    //visited[curr]=true;
+    for(int i=0;i<n;i++)
+    {
+      if(i==curr)
+      {
+        continue;
+      }
+      if(edges[curr][i]==1)
+      { 
+        //parent[i]=curr;
+        if(visited[i])
+        {
+          continue;
+        }
+        parent[i]=curr;
+        //q.push(i);
+        visited[i]=true;
+        
+        q.push(i);
+        //q->pop();
+        
+        /*result=getPath(edges,q,v2,n,visited);
+        if(result->size()>0)
+        {
+          result->push_back(curr);
+          return result;
+        }*/
+        
+      }
+    }
+   
+    
+    
+  } 
+   if(result->size()>0){
+  for(int i=parent[v2];i!=v1;i=parent[i])
+  {
+    result->push_back(i);
+  }
+  result->push_back(v1);
+   }
+  else{
+  
+  result=new vector<int>;
+  }
+  return result;
+}
+
+int main()
+{
+  int V, E, tempX, tempY;
+  cin >> V >> E;
+
+  /*
+
+  	   Write Your Code Here
+	   Complete the Rest of the Program
+	   You have to Print the output yourself
+	 
+  */
+ int** edges=new int*[V];
+  for(int i=0;i<V;i++)
+  {
+    edges[i]=new int[V]();
+  }
+  for(int i=0;i<E;i++)
+  {
+    int f,s;
+    cin>>f>>s;
+    edges[f][s]=1;
+    edges[s][f]=1;
+  }
+  bool *visited=new bool[V];
+  for(int i=0;i<V;i++)
+  {
+    visited[i]=false;
+  }
+  int v1,v2;
+  cin>>v1>>v2;
+ /* queue<int> *q=new queue<int>;
+  q->push(v1);*/
+  vector<int>* v=getPath(edges,v1,v2,V,visited);
+  if(v->size()>0)
+  for(int i=0;i<v->size();i++)
+  {
+    cout<<v->at(i)<<" ";
+  }
+  return 0;
+}
