@@ -1,0 +1,44 @@
+int solve(int n,int e,vector<int>u,vector<int>v)
+{
+  int** edges = new int*[n+1];
+  for(int i=0; i<=n; i++)
+  {
+    edges[i] = new int[n+1];
+    for(int j=0; j<=n; j++)
+      edges[i][j] =  0;
+  }
+  
+  for(int i=0; i<e; i++)
+  {
+    int f = u[i];
+    int s = v[i];
+    edges[f][s] = 1;
+    edges[s][f] = 1;
+  }
+  
+  int cycles = 0;
+  
+  for(int i=1; i<=n; i++)
+  {
+    for(int j=1; j<=n; j++)
+    {
+      if(edges[i][j])
+      {
+        int save = j; // save = 2
+        for(int k=1; k<=n; k++)
+        {
+          if(edges[save][k] && k!=i)
+          {
+            int save1 = k; // save1 = 4
+              if(edges[i][save1])
+                cycles++;
+          }
+        }
+      }
+    }
+  }
+  
+  
+  
+  return (cycles/6);
+}
