@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+void PairSum(int *input, int n) {	 
+		unordered_map<int,int>m;
+  for(int i=0;i<n;i++)
+  {
+    m[input[i]]++;
+  }
+  for(int i=0;i<n;i++)
+  {
+    if(m[-input[i]]>0)
+    {
+      for(int j=0;j<m[input[i]]*m[-input[i]];j++)
+      {if(input[i]<0)
+        cout<<input[i]<<" "<<-input[i]<<endl;
+      else{
+        cout<<-input[i]<<" "<<input[i]<<endl;
+      }}
+      m[input[i]]=0;
+      m[-input[i]]=0;
+    }
+  }
+	
+ 	}
+
