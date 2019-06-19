@@ -1,0 +1,47 @@
+#include<unordered_map>
+#include<bits/stdc++.h>
+char* uniqueChar(char *str){
+unordered_map<char,int> m;
+  for(int i=0;i<strlen(str);i++)
+  {
+    m[str[i]]++;
+  }
+  vector<char> v;
+  for(int i=0;i<strlen(str);i++)
+  {
+    if(m[str[i]]>0)
+    {
+      v.push_back(str[i]);
+      m[str[i]]=0;
+    }
+  }
+  for(int i=0;i<v.size();i++)
+  {
+    str[i]=v[i];
+  }
+  str[v.size()]='\0';
+  return str;
+}
+/*
+#include<bits/stdc++.h>
+using namespace std;
+char* uniqueChar(char *str){
+set<char> s;
+  char* result=new char[strlen(str)];
+  int j=0;
+  for(int i=0;i<strlen(str);i++)
+  {
+    if(s.find(str[i])==s.end())
+    {
+     s.insert(str[i]);
+     result[j]=str[i];
+      j++;
+    }
+  
+  }
+  result[j]='\0';
+  return result;
+
+
+}
+*/
