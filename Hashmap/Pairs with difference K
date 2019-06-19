@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+void printPairs(int *input, int n, int k) {
+	unordered_map<int,int> m;
+  for(int i=0;i<n;i++)
+  {
+    m[input[i]]++;
+  }
+  if(k!=0)
+  {for(int i=0;i<n;i++)
+  {
+    if(m.count(input[i]-k)>0)
+    {
+      for(int j=0;j<m[input[i]]*m[(input[i])-k];j++)
+      {      cout<<input[i]-k<<" "<<input[i]<<endl;
+      }
+      
+      
+    }
+    if(m.count(input[i]+k)>0)
+    {
+      for(int j=0;j<m[input[i]]*m[(input[i])+k];j++)
+      {      cout<<input[i]<<" "<<input[i]+k<<endl;
+      }
+     
+      
+    }
+     m[input[i]]=0;
+  }
+          }
+           else if(k==0){
+             for(int i=0;i<n;i++)
+             {
+               if(m.count(input[i])>0)
+             {
+               for(int j=0;j<m[input[i]]-1;j++)
+              { cout<<input[i]<<" "<<input[i]<<endl;}
+               
+                 m[input[i]]--;
+             }
+             }
+           }
+
+}
+
+
