@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+vector<int> longestSubsequence(int *arr, int n){
+  int start=arr[0];
+  int length=0;
+ unordered_map<int,bool> m;
+  for(int i=0;i<n;i++)
+  {
+    m[arr[i]]=false;
+  }
+  for(int i=0;i<n;i++)
+  {
+    int j=arr[i];
+    while(m.count(j)>0)
+    {m.erase(j);
+      j--;
+    }
+    int s=j++;
+    int k=arr[i]+1;
+    while(m.count(k)>0)
+    {
+      m.erase(k);
+      k++;
+    }
+    int l=k-1-s;
+    if(l>length)
+    {
+      length=l;
+      start=s;
+    }
+  }
+
+  vector<int> v;
+for(int i=start+1;i<=start+length;i++)
+{
+  v.push_back(i);
+}
+  return v;
+}
