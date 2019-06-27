@@ -1,0 +1,139 @@
+#include <vector>
+
+/*******************
+ * Main function -
+*
+int main() {
+    PriorityQueue pq;
+    int choice;
+    cin >> choice;
+    while(choice != -1) {
+        switch(choice) {
+            case 1 : // insert
+                int element;
+                cin >> element;
+                pq.insert(element);
+                break;
+            case 2 : // getMin
+                cout << pq.getMin() << endl;
+                break;
+            case 3 : // removeMin
+                cout << pq.removeMin() << endl;
+                break;
+            case 4 : // size
+                cout << pq.getSize() << endl;
+                break;
+            case 5 : // isEmpty
+                if(pq.isEmpty()) {
+                    cout << "true" << endl;
+                }
+                else {
+                    cout << "false" << endl;
+                }
+            default :
+                return 0;
+        }
+        cin >> choice;
+    }
+}
+**************************/
+
+
+class PriorityQueue {
+    vector<int> pq;
+    
+    public :
+    
+    PriorityQueue() {
+        
+    }
+    
+    bool isEmpty() {
+        return pq.size() == 0;
+    }
+    
+    // Return the size of priorityQueue - no of elements present
+    int getSize() {
+        return pq.size();
+    }
+    
+    int getMin() {
+        if(isEmpty()) {
+            return 0;		// Priority Queue is empty
+        }
+        return pq[0];
+    }
+    
+    void insert(int element) {
+        pq.push_back(element);
+        
+        int childIndex = pq.size() - 1;
+        
+        while(childIndex > 0) {
+            int parentIndex = (childIndex - 1) / 2;
+            
+            if(pq[childIndex] < pq[parentIndex]) {
+                int temp = pq[childIndex];
+                pq[childIndex] = pq[parentIndex];
+                pq[parentIndex] = temp;
+            }
+            else {
+                break;
+            }
+            childIndex = parentIndex;
+        }
+        
+    }
+    
+    int removeMin() {
+if(pq.size()==0)
+  return 0;
+       int root=pq[0];
+      pq[0]=pq[pq.size()-1];
+      pq.pop_back();
+      int rooti=0;
+       int child1i=2*rooti+1;
+        int child2i=2*rooti+2;
+      while(child1i<=pq.size()-1 && child2i<=pq.size()-1)
+      {
+        int min1=min(pq[rooti],min(pq[child1i],pq[child2i]));
+        int mini=0;
+        if(min1==pq[rooti])
+          mini=rooti;
+        else if(min1==pq[child1i])
+          mini=child1i;
+        else
+          mini=child2i;
+        
+        int p=pq[mini];
+        pq[mini]=pq[rooti];
+        pq[rooti]=p;
+        rooti=mini;
+         child1i=2*rooti+1;
+         child2i=2*rooti+2;
+       if(child2i>pq.size()-1 && child1i<=pq.size()-1)
+        {
+         if(pq[rooti]>pq[child1i])
+         {
+           int temp=pq[rooti];
+           pq[rooti]=pq[child1i];
+             pq[child1i]=temp;
+         }
+          break;
+        }
+        else if(child1i>pq.size()-1 && child2i>pq.size()-1)
+          break;
+        else if(pq[rooti]<pq[child1i] && pq[rooti]<pq[child2i])
+          break;
+         
+        
+      }
+     
+      
+      
+      
+    return root;
+    }
+    
+    
+};
