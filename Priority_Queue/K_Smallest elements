@@ -1,0 +1,23 @@
+#include<queue>
+vector<int> kSmallest(int *input, int n, int k) {
+	priority_queue<int> p;
+  for(int i=0;i<k;i++)
+  {
+    p.push(input[i]);
+  }
+  for(int i=k;i<n;i++)
+  {
+    if(input[i]<p.top())
+    {
+      p.pop();
+      p.push(input[i]);
+    }
+  }
+vector<int> v;
+  for(int i=0;i<k;i++)
+  {
+    v.push_back(p.top());
+    p.pop();
+  }
+  return v;
+}
